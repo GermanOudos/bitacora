@@ -1,0 +1,740 @@
+<title>Bitácora de Certificación</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f2f4f8;
+    --surface: #ffffff;
+    --surface-2: #eceff5;
+    --border: #dde2eb;
+    --ink: #161a24;
+    --ink-soft: #565f74;
+    --ink-faint: #8891a4;
+    --accent: #3450d6;
+    --success: #178a5a;
+    --warn: #ad6110;
+    --cat-orden: #2f6fd6;
+    --cat-dup: #8347c9;
+    --cat-adapt: #ad6110;
+    --cat-reuso: #0e8f83;
+    --shadow: 0 1px 2px rgba(20, 24, 38, 0.04), 0 8px 24px -12px rgba(20, 24, 38, 0.12);
+    --font-display: "Manrope", system-ui, sans-serif;
+    --font-body: "Source Serif 4", Georgia, serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12151d;
+      --surface: #181c27;
+      --surface-2: #1f2432;
+      --border: #2b3142;
+      --ink: #eaecf4;
+      --ink-soft: #a7afc4;
+      --ink-faint: #707a92;
+      --accent: #8299ff;
+      --success: #3fcf8e;
+      --warn: #eaa855;
+      --cat-orden: #7ea3ff;
+      --cat-dup: #bd94f2;
+      --cat-adapt: #eaa855;
+      --cat-reuso: #3fd0c4;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 28px -12px rgba(0, 0, 0, 0.55);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #12151d;
+    --surface: #181c27;
+    --surface-2: #1f2432;
+    --border: #2b3142;
+    --ink: #eaecf4;
+    --ink-soft: #a7afc4;
+    --ink-faint: #707a92;
+    --accent: #8299ff;
+    --success: #3fcf8e;
+    --warn: #eaa855;
+    --cat-orden: #7ea3ff;
+    --cat-dup: #bd94f2;
+    --cat-adapt: #eaa855;
+    --cat-reuso: #3fd0c4;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 28px -12px rgba(0, 0, 0, 0.55);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.55;
+    padding: 0 16px 64px;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  h1, h2, h3, .stat-value, .chip, button, .badge, .code, .pill, .toolbar, .meta-bar {
+    font-family: var(--font-display);
+  }
+  code, .code, .mono { font-family: var(--font-mono); }
+  h1, h2, h3 { text-wrap: balance; margin: 0; }
+  a { color: var(--accent); }
+  ::selection { background: color-mix(in srgb, var(--accent) 30%, transparent); }
+
+  /* ---------- Header ---------- */
+  header.top {
+    padding: 36px 0 22px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-size: clamp(26px, 4.5vw, 34px);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+  .lede {
+    font-family: var(--font-body);
+    color: var(--ink-soft);
+    font-size: 16px;
+    max-width: 62ch;
+    margin-top: 10px;
+  }
+  .meta-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    margin-top: 18px;
+    font-size: 12.5px;
+    color: var(--ink-faint);
+  }
+  .meta-bar b { color: var(--ink-soft); font-weight: 600; }
+
+  /* ---------- Stat tiles ---------- */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .stat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 18px;
+    box-shadow: var(--shadow);
+  }
+  .stat-label {
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 600;
+  }
+  .stat-value {
+    font-size: 30px;
+    font-weight: 800;
+    margin-top: 4px;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-sub { font-size: 12.5px; color: var(--ink-soft); margin-top: 2px; }
+  .stat.accent .stat-value { color: var(--success); }
+
+  .progress-track {
+    display: flex;
+    height: 10px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    margin: 4px 0 34px;
+  }
+  .progress-fill {
+    background: linear-gradient(90deg, var(--success), color-mix(in srgb, var(--success) 70%, var(--accent)));
+    height: 100%;
+  }
+
+  /* ---------- Section headers ---------- */
+  section { margin-bottom: 40px; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  h2 { font-size: 20px; font-weight: 800; }
+  .section-note { color: var(--ink-faint); font-size: 13px; font-family: var(--font-body); font-style: italic; }
+
+  /* ---------- Findings ---------- */
+  .toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 14px 0 18px;
+    align-items: center;
+  }
+  .chip {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--ink-soft);
+    font-size: 12.5px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.12s, color 0.12s, border-color 0.12s;
+  }
+  .chip .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; opacity: 0.7; }
+  .chip[data-active="true"] {
+    color: var(--surface);
+    border-color: transparent;
+  }
+  .chip[data-cat="orden"][data-active="true"] { background: var(--cat-orden); }
+  .chip[data-cat="dup"][data-active="true"] { background: var(--cat-dup); }
+  .chip[data-cat="adapt"][data-active="true"] { background: var(--cat-adapt); }
+  .chip[data-cat="reuso"][data-active="true"] { background: var(--cat-reuso); }
+  .chip[data-cat="all"][data-active="true"] { background: var(--ink); }
+  .toolbar-btn {
+    margin-left: auto;
+    border: none;
+    background: none;
+    color: var(--accent);
+    font-size: 12.5px;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 6px 4px;
+  }
+
+  .finding {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--cat-orden);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  .finding[data-cat="dup"] { border-left-color: var(--cat-dup); }
+  .finding[data-cat="adapt"] { border-left-color: var(--cat-adapt); }
+  .finding[data-cat="reuso"] { border-left-color: var(--cat-reuso); }
+  .finding[hidden] { display: none !important; }
+
+  .finding summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 15px 18px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .finding summary::-webkit-details-marker { display: none; }
+  .finding-num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+    padding-top: 3px;
+    min-width: 26px;
+  }
+  .finding-head { flex: 1; min-width: 0; }
+  .finding-top-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  .badge {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    padding: 3px 9px;
+    border-radius: 999px;
+    color: var(--surface);
+  }
+  .badge.orden { background: var(--cat-orden); }
+  .badge.dup { background: var(--cat-dup); }
+  .badge.adapt { background: var(--cat-adapt); }
+  .badge.reuso { background: var(--cat-reuso); }
+  .finding-date { font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-faint); }
+  .finding-hus { font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-soft); }
+  .finding-title { font-family: var(--font-display); font-weight: 700; font-size: 15px; }
+  .finding-takeaway { color: var(--ink-soft); font-size: 13.5px; margin-top: 3px; font-family: var(--font-body); }
+  .finding-chevron {
+    font-family: var(--font-mono);
+    color: var(--ink-faint);
+    font-size: 13px;
+    padding-top: 4px;
+    transition: transform 0.15s;
+  }
+  details[open] .finding-chevron { transform: rotate(90deg); }
+  .finding-body {
+    padding: 0 18px 18px 58px;
+    color: var(--ink);
+    font-size: 14px;
+  }
+  .finding-body p { margin: 0 0 10px; }
+  .finding-body p:last-child { margin-bottom: 0; }
+  .finding-body .callout {
+    background: var(--surface-2);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- Reusable pieces strip ---------- */
+  .reuse-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .reuse-strip .code {
+    font-size: 12px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 5px 9px;
+    color: var(--cat-reuso);
+    font-weight: 500;
+  }
+
+  /* ---------- Open questions ---------- */
+  .open-list { display: grid; gap: 10px; }
+  .open-item {
+    display: flex;
+    gap: 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 13.5px;
+  }
+  .open-item .mark { color: var(--warn); font-weight: 800; font-family: var(--font-display); }
+  .open-item .src { color: var(--ink-faint); font-family: var(--font-mono); font-size: 11.5px; }
+
+  /* ---------- Checklist: completed ---------- */
+  .done-list { display: grid; gap: 8px; }
+  .done-row {
+    display: grid;
+    grid-template-columns: 62px 1fr auto;
+    gap: 14px;
+    align-items: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
+  }
+  .done-row .hu-code {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--success);
+  }
+  .done-row .hu-title { font-size: 13.5px; font-family: var(--font-display); font-weight: 600; }
+  .done-row .hu-impl { font-size: 12px; color: var(--ink-faint); font-family: var(--font-mono); margin-top: 2px; }
+  .done-row .hu-nota {
+    font-size: 11px;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    white-space: nowrap;
+  }
+  .check-icon {
+    width: 20px; height: 20px; border-radius: 50%;
+    background: color-mix(in srgb, var(--success) 18%, var(--surface));
+    color: var(--success);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 800;
+    justify-self: center;
+  }
+
+  /* ---------- Next up ---------- */
+  .nextup {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .nextup .pill {
+    background: color-mix(in srgb, var(--warn) 14%, var(--surface));
+    border: 1px solid color-mix(in srgb, var(--warn) 40%, var(--border));
+    color: var(--warn);
+    border-radius: 10px;
+    padding: 8px 12px;
+    font-size: 12.5px;
+    font-weight: 700;
+  }
+  .nextup .pill span { color: var(--ink-soft); font-weight: 500; font-family: var(--font-body); }
+
+  /* ---------- Backlog groups ---------- */
+  .backlog-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .phase {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .phase summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 12px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 13.5px;
+  }
+  .phase summary::-webkit-details-marker { display: none; }
+  .phase summary .count {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 11.5px;
+    color: var(--ink-faint);
+    background: var(--surface-2);
+    padding: 2px 8px;
+    border-radius: 999px;
+  }
+  .phase-items {
+    border-top: 1px solid var(--border);
+    padding: 10px 14px 12px;
+    display: grid;
+    gap: 6px;
+  }
+  .phase-item {
+    display: flex;
+    gap: 8px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+  .phase-item .hu-code { font-family: var(--font-mono); color: var(--ink-faint); min-width: 40px; }
+
+  footer {
+    margin-top: 48px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    color: var(--ink-faint);
+    font-size: 12px;
+    font-family: var(--font-mono);
+  }
+
+  @media (max-width: 720px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .backlog-grid { grid-template-columns: 1fr; }
+    .done-row { grid-template-columns: 46px 1fr; }
+    .done-row .hu-nota { display: none; }
+    .finding-body { padding-left: 18px; }
+  }
+</style>
+
+<header class="top">
+  <div class="eyebrow">sa_certification_app · HU_App_Certificacion_V2.docx</div>
+  <h1>Bitácora de Certificación Biométrica</h1>
+  <p class="lede">Avance del backlog de 99 Historias de Usuario y las decisiones de arquitectura, orden y reuso que salieron al implementarlas — extraídas de las notas del checklist de desarrollo.</p>
+  <div class="meta-bar">
+    <span><b>Última HU cerrada:</b> HU97</span>
+    <span><b>Siguiente:</b> HU98</span>
+    <span><b>Tests en verde:</b> 189/189</span>
+    <span><b>Migraciones:</b> 3</span>
+  </div>
+</header>
+
+<section aria-label="Resumen de avance">
+  <div class="stats">
+    <div class="stat accent">
+      <div class="stat-label">Completadas</div>
+      <div class="stat-value">15</div>
+      <div class="stat-sub">de 99 HU, con test</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Pendientes</div>
+      <div class="stat-value">84</div>
+      <div class="stat-sub">siguiente: HU98</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Avance</div>
+      <div class="stat-value">15%</div>
+      <div class="stat-sub">del backlog total</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Hallazgos</div>
+      <div class="stat-value">11</div>
+      <div class="stat-sub">notas de decisión registradas</div>
+    </div>
+  </div>
+  <div class="progress-track" role="img" aria-label="15 de 99 historias completadas">
+    <div class="progress-fill" style="width: 15.2%"></div>
+  </div>
+</section>
+
+<section aria-label="Hallazgos">
+  <div class="section-head">
+    <h2>Hallazgos y decisiones</h2>
+    <span class="section-note">lo más importante — cada uno viene de una Nota del checklist</span>
+  </div>
+
+  <div class="toolbar" id="toolbar">
+    <button class="chip" data-cat="all" data-active="true"><span class="dot" style="color:var(--ink)"></span>Todos (11)</button>
+    <button class="chip" data-cat="orden"><span class="dot" style="color:var(--cat-orden)"></span>Orden y dependencias (3)</button>
+    <button class="chip" data-cat="dup"><span class="dot" style="color:var(--cat-dup)"></span>Duplicados (1)</button>
+    <button class="chip" data-cat="adapt"><span class="dot" style="color:var(--cat-adapt)"></span>Adaptación arquitectónica (1)</button>
+    <button class="chip" data-cat="reuso"><span class="dot" style="color:var(--cat-reuso)"></span>Reuso e integración (6)</button>
+    <button class="toolbar-btn" id="toggleAll">Expandir todos</button>
+  </div>
+
+  <div id="findings"></div>
+</section>
+
+<section aria-label="Piezas reutilizables">
+  <div class="section-head"><h2>Piezas construidas para reusar</h2></div>
+  <p class="section-note" style="font-style:normal; color:var(--ink-soft); font-family:var(--font-body); font-size:13.5px;">Cada una nació en una HU y ya la reutilizan las siguientes sin duplicar lógica.</p>
+  <div class="reuse-strip">
+    <span class="code">PoliticaContrasena</span>
+    <span class="code">IAuditoriaService</span>
+    <span class="code">IIdentidadTerminalProvider</span>
+    <span class="code">VerificarAccesoAdministradorAsync</span>
+    <span class="code">GestionUsuariosServicio</span>
+    <span class="code">BaseDeDatosMigrada (tests)</span>
+    <span class="code">Trigger Postgres solo-lectura</span>
+    <span class="code">.env / ArchivoEntornoLocal</span>
+  </div>
+</section>
+
+<section aria-label="Puntos abiertos">
+  <div class="section-head"><h2>Puntos abiertos</h2></div>
+  <div class="open-list">
+    <div class="open-item"><span class="mark">·</span><div>HU78 exige <code class="mono">ConcurrenciaCxAlfa.txt</code> y <code class="mono">Concurrencia_alfanumerica_servidor.txt</code>, pero ninguna de las 99 HU los genera explícitamente — posible vacío real del backlog. <span class="src">Nota 2</span></div></div>
+    <div class="open-item"><span class="mark">·</span><div>Contraseñas ya guardadas que no cumplan la política de HU42 quedan bloqueadas al autenticar; el alta/cambio de contraseña, cuando se construya, debe reutilizar <code class="mono">PoliticaContrasena</code>. <span class="src">Nota 7</span></div></div>
+    <div class="open-item"><span class="mark">·</span><div>El contador de intentos fallidos de HU43 vive en memoria del proceso: se reinicia si la app se reinicia. <span class="src">Nota 8</span></div></div>
+    <div class="open-item"><span class="mark">·</span><div>Cuando exista una pantalla de consulta de auditoría, debe aplicar <code class="mono">VerificarAccesoAdministradorAsync</code> (HU43) antes de mostrar los registros. <span class="src">Nota 9</span></div></div>
+  </div>
+</section>
+
+<section aria-label="Checklist completado">
+  <div class="section-head"><h2>Completadas — 15/99</h2></div>
+  <div class="done-list" id="doneList"></div>
+</section>
+
+<section aria-label="Próximas HU">
+  <div class="section-head"><h2>Próximas en el orden</h2></div>
+  <div class="nextup">
+    <span class="pill">HU98 <span>Preservación de datos de usuarios deshabilitados</span></span>
+    <span class="pill">HU99 <span>Bloqueo de autenticación para deshabilitados</span></span>
+    <span class="pill">HU44 <span>Auditoría del aviso de tratamiento de datos</span></span>
+    <span class="pill">HU45 <span>Documento ATDP con estampa cronológica</span></span>
+  </div>
+</section>
+
+<section aria-label="Backlog pendiente por fase">
+  <div class="section-head">
+    <h2>Backlog pendiente por fase</h2>
+    <span class="section-note">84 HU agrupadas por dominio, en el orden real de desarrollo</span>
+  </div>
+  <div class="backlog-grid" id="backlog"></div>
+</section>
+
+<footer>docs/Checklist-HU.md &amp; docs/Criterios-HU.md — sa_certification_app</footer>
+
+<script>
+(function () {
+  var findings = [
+    { cat: "orden", date: "2026-09-16", nota: "Nota", hus: "HU5, HU18, HU24, HU25, HU41",
+      title: "Auditoría acoplada a un dominio que aún no existe",
+      take: "5 HU de auditoría (carga, templates, cotejo, login) piden campos que solo su dominio produce; se reubicaron justo después de su HU de dominio en vez de agruparlas con las genéricas.",
+      body: "<p>Sus criterios piden campos que solo ese dominio puede producir: nombre de archivo, NUIP, dedo cotejado, usuario que intentó loguearse. En cambio HU74–HU77 sí se pueden implementar y verificar de forma independiente porque hablan del mecanismo de auditoría en sí, no de un dominio concreto.</p>" },
+
+    { cat: "orden", date: "2026-09-16", nota: "Nota 2", hus: "HU48→HU47, HU78/79→HU67",
+      title: "Auditoría de dependencias sobre las 99 HU",
+      take: "Revisión completa del backlog: HU48 depende de un resultado que produce HU47; HU78/79 dependen de dos archivos que genera HU67. Ambas familias se reubicaron.",
+      body: "<p><b>HU48</b> (\"Despliegue de datos alfanuméricos tras resultado hit\") depende de que exista un \"hit\" de cotejo biométrico — eso lo produce HU47. Estaba mal ubicada en el grupo de consultas alfanuméricas; se movió justo después de HU47.</p><p><b>HU78</b> (exige <code class=\"mono\">ConcurrenciaCXBiometrica.txt</code> y <code class=\"mono\">Concurrencia_biometrica_servidor.txt</code>) depende de que HU67 ya pueda generar esos archivos. HU79 depende de HU78. Ambas se movieron a justo después de HU67.</p><div class=\"callout\">Abierto: HU78 también exige dos archivos alfanuméricos que ninguna de las 99 HU genera explícitamente — posible vacío real del backlog, a resolver al llegar ahí.</div>" },
+
+    { cat: "orden", date: "2026-09-17", nota: "Nota 3", hus: "HU12, HU13",
+      title: "HU12 depende de HU13 en su totalidad",
+      take: "El criterio 1 de HU12 (\"detectar el SO y aplicar la ruta estándar\") es exactamente el mecanismo que define HU13. Se invirtió el orden: HU13 primero, HU12 después.",
+      body: "<p>HU13 es la utilidad base de detección de sistema operativo y ruta base; HU12 es el gate de validación que la usa antes de cargar o procesar archivos. Implementar HU12 sin HU13 habría significado construir la misma lógica dos veces.</p>" },
+
+    { cat: "dup", date: "2026-09-17", nota: "Nota 4", hus: "HU95≈HU90 · HU20/HU87 · HU14/HU15",
+      title: "Tres pares de HU casi idénticas en el Word",
+      take: "Revisión completa buscando requisitos duplicados, no solo orden. HU95 repite HU90 sin declararse HU integradora; HU20/HU87 comparten núcleo pero HU87 agrega alcance real; HU14/HU15 solo se parecen en el título.",
+      body: "<p><b>HU95 ≈ HU90</b> — criterios casi calcados (SHA-256, 64 caracteres hex, verificación posterior). A diferencia de HU91, que sí declara explícitamente que consolida varios requerimientos, HU95 no tiene esa aclaración: parece repetición real. Decisión: se implementa una sola vez en HU90; HU95 se marca ✅ automáticamente verificando sus criterios contra lo ya construido.</p><p><b>HU20 / HU87</b> — comparten \"todo debe guardarse en JPG, se rechaza o convierte cualquier otro formato\" casi palabra por palabra, pero HU87 agrega alcance real (ubicación centralizada, metadatos, confirmación). Decisión: reusar el helper de validación/conversión JPG de HU20, no reimplementar la regla.</p><p><b>HU14 / HU15</b> — títulos casi idénticos pero criterios complementarios (mecánica de iteración vs. validación de formato/timeout/auditoría). Solo una nota para no confundirlas en la planeación.</p>" },
+
+    { cat: "adapt", date: "2026-09-18", nota: "Nota 5", hus: "HU1 (aplica a HU29, HU40, HU42, HU43)",
+      title: "HU1 asume una arquitectura cliente-servidor que este proyecto no tiene",
+      take: "Los criterios mencionan HTTP 401/403 y tokens JWT, pero sa_certification_app es una app de escritorio sin servidor. Se acordó una interpretación explícita, aplicada a todo el grupo de identidad.",
+      body: "<p>Interpretación acordada: \"servicios alojados en el servidor\" = servicios/operaciones internas de la aplicación; \"autorización\" = una <code class=\"mono\">Sesion</code> vigente sostenida en el proceso (activa y no expirada), no un token HTTP. El criterio de 401/403 se traduce a <code class=\"mono\">AccesoNoAutorizadoException</code>, documentada explícitamente como equivalente — mismo criterio aplicado después en HU29, HU40, HU42 y HU43.</p>" },
+
+    { cat: "reuso", date: "2026-09-18", nota: "Nota 6", hus: "HU40 extiende HU29",
+      title: "HU40 se solapa fuertemente con HU29",
+      take: "Mismo formulario, misma validación contra la BD, mismo mensaje genérico. En vez de otra pantalla, se extendió AutenticacionServicio/LoginViewModel con las 2 piezas realmente nuevas.",
+      body: "<p>HU40 C1 = HU29 C1 (formulario), HU40 C6 = HU29 C2 (validación contra BD), HU40 C5/C7 = HU29 C4 (mensaje genérico). Lo genuinamente nuevo: (a) longitud mínima de 8 caracteres en frontend y backend — nueva clase <code class=\"mono\">PoliticaContrasena</code>, dejada como punto de extensión para HU42; (b) límite de 3 segundos para el redirect, verificado con test de tiempo real.</p>" },
+
+    { cat: "reuso", date: "2026-09-21", nota: "Nota 7", hus: "HU42 extiende HU40",
+      title: "HU42 amplía PoliticaContrasena en vez de crear otra validación",
+      take: "Frontend y backend comparten la misma función de validación y el mismo mensaje. Nueva excepción es la única que sí detalla los requisitos incumplidos, sin revelar si la cuenta existe.",
+      body: "<p><code class=\"mono\">PoliticaContrasena</code> ganó mayúscula, minúscula, número y carácter especial, sumados a la longitud mínima de HU40. El backend lanza <code class=\"mono\">ContrasenaNoCumplePoliticaException</code> (hereda de <code class=\"mono\">CredencialesInvalidasException</code>): es la única excepción al mensaje genérico de HU29, y es segura porque describe la política pública — no la cuenta — y se evalúa antes de consultar al usuario. Los caracteres especiales son fijos a propósito: es una regla de seguridad, no configurable por entorno.</p><div class=\"callout\">Limitación conocida: contraseñas ya guardadas que no cumplan la política quedan bloqueadas al autenticar.</div>" },
+
+    { cat: "reuso", date: "2026-09-21", nota: "Nota 8", hus: "HU43 reutiliza HU1, HU29, HU40, HU42",
+      title: "HU43 es una HU integradora: 6 de 8 criterios ya existían",
+      take: "Solo 2 piezas genuinamente nuevas: el gate de rol de administrador y el bloqueo temporal tras N intentos fallidos consecutivos, ambos configurables por entorno.",
+      body: "<p>Nuevo: (a) <code class=\"mono\">VerificarAccesoAdministradorAsync</code> — además de sesión vigente, exige rol Administrador y estado Activo, sin copiar el rol a la sesión; (b) bloqueo temporal en <code class=\"mono\">AutenticacionServicio</code> por nombre de usuario (exista o no, sin enumeración), defaults 5 intentos / 15 min vía <code class=\"mono\">CERTBIOMETRICA_LOGIN_MAX_INTENTOS</code> / <code class=\"mono\">_BLOQUEO_MINUTOS</code>.</p><div class=\"callout\">Justificado: HTTPS/TLS no aplica (app de escritorio sin servidor, la contraseña nunca viaja). El contador de fallos vive en memoria del proceso.</div>" },
+
+    { cat: "reuso", date: "2026-09-21", nota: "Nota 9", hus: "HU41 reutiliza el motor de HU74-77",
+      title: "HU41 conecta el login al motor de auditoría existente",
+      take: "No se construyó ningún mecanismo de auditoría nuevo. Se eliminaron 4 llamadas de log dispersas y se consolidaron 2 fakes de test casi idénticos.",
+      body: "<p><code class=\"mono\">AutenticacionServicio.RegistrarIntentoAsync</code> es el único punto de salida de <code class=\"mono\">AutenticarAsync</code>: escribe cada intento (éxito o fallo) con actor, IP, fecha/hora con zona y el motivo real del fallo — que nunca se le revela al usuario. Nuevo: <code class=\"mono\">IIdentidadTerminalProvider</code>, porque nadie proveía identificador de terminal ni MAC para el registro de auditoría.</p><div class=\"callout\">Pendiente: la futura UI de consulta de auditoría debe aplicar VerificarAccesoAdministradorAsync (HU43).</div>" },
+
+    { cat: "reuso", date: "2026-09-21", nota: "Nota 10", hus: "HU96 — base de HU97, HU98, HU99",
+      title: "HU96 construye el ciclo de vida de usuarios y automatiza el primer administrador",
+      take: "La tabla de historial ya existía pero nada la escribía. Se construyó GestionUsuariosServicio con trigger de solo lectura, y se automatizó por completo la creación del primer administrador.",
+      body: "<p><code class=\"mono\">GestionUsuariosServicio</code> reemplaza el stub vacío <code class=\"mono\">GestiónDelCicloDe</code>: crear, habilitar, deshabilitar y consultar historial, todas exigen sesión de administrador y ninguna elimina (HU97). <code class=\"mono\">GuardarConHistorialAsync</code> guarda usuario + historial en una sola transacción. Migración con trigger de Postgres que rechaza UPDATE/DELETE/TRUNCATE sobre el historial.</p><p>El primer administrador se crea solo con <code class=\"mono\">CERTBIOMETRICA_ADMIN_INICIAL_USUARIO</code>/<code class=\"mono\">_CONTRASENA</code> en un archivo <code class=\"mono\">.env</code> que la app carga sola al arrancar — sin script, sin pasos manuales. Idempotente, valida configuración a medias, y dos instancias arrancando a la vez no se pisan.</p>" },
+
+    { cat: "reuso", date: "2026-09-22", nota: "Nota 11", hus: "HU97 reutiliza HU96",
+      title: "HU97 ya estaba resuelta en gran parte por las decisiones de HU96",
+      take: "Los contratos nunca expusieron eliminación. Se agregó una tercera capa de defensa — trigger de Postgres y análisis estático del código — más un método que audita y rechaza cualquier intento.",
+      body: "<p><code class=\"mono\">IUsuarioRepository</code> e <code class=\"mono\">IGestionUsuariosServicio</code> nunca tuvieron un método de eliminación. Nuevo: <code class=\"mono\">EliminarAsync</code> — el punto único que cualquier canal futuro debería invocar para \"eliminar\"; siempre audita (actor, fecha, canal) y siempre rechaza, incluso sin sesión válida, porque la prohibición es absoluta. Trigger de Postgres bloquea DELETE/TRUNCATE sobre Usuario sin afectar UPDATE. Test de análisis estático vigila que nadie agregue un <code class=\"mono\">Usuario.Remove</code> en el futuro.</p>" }
+  ];
+
+  var doneList = [
+    { code: "HU2", title: "Persistencia y resiliencia sin degradación", impl: "Infrastructure/ — persistencia, concurrencia, reintentos" },
+    { code: "HU74", title: "Generación automática de registros de auditoría", impl: "AuditoriaService.RegistrarAsync" },
+    { code: "HU75", title: "Campos obligatorios en cada registro de auditoría", impl: "RegistroAuditoria, FormatoFechaHora" },
+    { code: "HU76", title: "Vinculación por identificador de transacción", impl: "AuditoriaRepository.ConsultarAsync(transaccionOrigen:)" },
+    { code: "HU77", title: "Almacenamiento y consulta de auditoría", impl: "IAuditoriaRepository append-only + hash" },
+    { code: "HU13", title: "Rutas estándar según sistema operativo", impl: "RutaEstandarProvider / RutaEstandarSelector" },
+    { code: "HU12", title: "Verificación de ruta antes de cargue", impl: "VerificacionRutaCargue", nota: "Nota 3" },
+    { code: "HU1", title: "Control de acceso a servicios internos", impl: "AutorizacionServicio.VerificarAcceso", nota: "Nota 5" },
+    { code: "HU29", title: "Autenticación del administrador", impl: "AutenticacionServicio, LoginWindow/LoginViewModel" },
+    { code: "HU40", title: "Credenciales válidas e inválidas", impl: "extiende AutenticacionServicio", nota: "Nota 6" },
+    { code: "HU42", title: "Política de seguridad en contraseña", impl: "PoliticaContrasena", nota: "Nota 7" },
+    { code: "HU43", title: "Acceso a funcionalidades de administración", impl: "VerificarAccesoAdministradorAsync + bloqueo", nota: "Nota 8" },
+    { code: "HU41", title: "Auditoría de intentos de autenticación", impl: "conecta con el motor de HU74-77", nota: "Nota 9" },
+    { code: "HU96", title: "Historial de estados del usuario", impl: "GestionUsuariosServicio + bootstrap admin", nota: "Nota 10" },
+    { code: "HU97", title: "Restricción absoluta de eliminación", impl: "EliminarAsync + trigger Postgres", nota: "Nota 11" }
+  ];
+
+  var backlog = [
+    { name: "Aviso de tratamiento de datos", items: [["HU44","Auditoría de decisión del ciudadano"],["HU45","Documento ATDP con estampa cronológica"]] },
+    { name: "Carga alfanumérica inicial", items: [["HU3","Carga de archivo alfanumérico"],["HU4","Validación estructural del archivo"],["HU5","Log de auditoría de la carga"],["HU80","Fecha/hora de inicio y fin"],["HU81","Auditoría de usuario e IP"],["HU82","Métricas de registros y NUIT"],["HU83","Templates encontrados en carpetas"],["HU84","Archivo cargue_inicial.txt"],["HU85","Log disponible para consulta"],["HU86","Trazabilidad operativa del cargue"]] },
+    { name: "Consulta alfanumérica", items: [["HU30","Ingreso de criterios de búsqueda"],["HU31","Visualización de resultados"],["HU32","Notificación sin resultados"],["HU34","Integridad de datos mostrados"],["HU36","Registro de consultas"],["HU37","Persistencia en consulta.txt"],["HU38","Estructura uniforme del registro"],["HU39","Evidencia trazable para entrega"],["HU33","Exportación a PDF"]] },
+    { name: "Templates biométricos", items: [["HU6","Estructura de carpetas de templates"],["HU7","Rango de numeración de dedos"],["HU8","Formatos soportados en importación"],["HU16","Recepción y validación de templates"],["HU18","Auditoría de recepción/procesamiento"]] },
+    { name: "Descifrado y llaves", items: [["HU9","Registro seguro de llaves"],["HU10","Integridad de llaves como prerequisito"],["HU11","Motor de descifrado sobre 'appl'"],["HU14","Descifrado previo al cotejo 1 a 1"],["HU15","Validación/timeout del descifrado"],["HU17","Procesamiento para matching"]] },
+    { name: "Cotejo biométrico", items: [["HU19","Umbral de calidad de decisión"],["HU21","Estructura APPL para el cotejo"],["HU22","Minucia de referencia desde CAND"],["HU23","Cotejo integral con evidencias"],["HU47","Validación biométrica contra NUIP"],["HU48","Despliegue de datos tras hit"],["HU24","Registro automático por cotejo"],["HU25","Integridad de logs del cotejo"],["HU46","Enmascaramiento visual de huella"]] },
+    { name: "Evidencias JPG", items: [["HU20","Evidencias de ejecución en JPG"],["HU56","Captura JPG + log TXT al finalizar"],["HU87","Capturas JPEG para auditoría"]] },
+    { name: "Trazabilidad por captor", items: [["HU51","Trazabilidad por cotejo"],["HU52","Archivo de trazabilidad"],["HU53","Protección contra modificación"],["HU54","Integridad de la trazabilidad"]] },
+    { name: "SDK y certificación MINETS", items: [["HU26","Homologación NIST MINETS"],["HU27","Gestión documental de evidencia"],["HU28","Documentación de cambios de versión"]] },
+    { name: "Empaquetado de evidencias ZIP", items: [["HU88","Recopilación automática de evidencias"],["HU89","Archivo ZIP de evidencias"],["HU90","Hash SHA-256 del paquete ZIP"],["HU91","Flujo completo de empaquetado"],["HU92","Consulta del hash SHA-256"],["HU93","Disponibilidad del ZIP y su hash"],["HU94","Empaquetado con registro de novedades"],["HU95","Hash SHA-256 obligatorio (= HU90)"]] },
+    { name: "Rendimiento y concurrencia", items: [["HU35","Rendimiento sostenido"],["HU49","Tiempo de respuesta del cotejo"],["HU50","Validación mínima por sesión"],["HU55","100.000 cotejos appl/cand"],["HU57","Límite de tiempo del proceso"],["HU58","Cargue previo a cotejos"],["HU59","Disponibilidad de appl/cand"],["HU60","Flujo integral en ventana de tiempo"],["HU68","Carga de archivos de concurrencia"],["HU69","Validación estructural del archivo"],["HU70","Distribución entre terminales"],["HU71","Visualización de distribución"],["HU72","Notificación de errores"],["HU73","Auditoría de carga y distribución"],["HU64","Rendimiento bajo concurrencia real"],["HU65","5 conexiones simultáneas"],["HU66","Puntuación por conexión"],["HU67","Logs individuales y consolidado"],["HU78","Archivos de resultados del sistema"],["HU79","Bloqueo por inconsistencias"],["HU61","Tiempo total de desempeño"],["HU62","Puntaje por tabla de puntuación"],["HU63","Prueba integral de desempeño"]] }
+  ];
+
+  var catLabel = { orden: "Orden", dup: "Duplicado", adapt: "Adaptación", reuso: "Reuso" };
+
+  function el(tag, cls, html) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (html !== undefined) e.innerHTML = html;
+    return e;
+  }
+
+  function renderFindings() {
+    var host = document.getElementById("findings");
+    findings.forEach(function (f, i) {
+      var d = el("details", "finding");
+      d.setAttribute("data-cat", f.cat);
+      var summary = el("summary");
+      summary.innerHTML =
+        '<span class="finding-num">' + String(i + 1).padStart(2, "0") + '</span>' +
+        '<div class="finding-head">' +
+          '<div class="finding-top-row">' +
+            '<span class="badge ' + f.cat + '">' + catLabel[f.cat] + '</span>' +
+            '<span class="finding-date">' + f.date + ' · ' + f.nota + '</span>' +
+            '<span class="finding-hus">' + f.hus + '</span>' +
+          '</div>' +
+          '<div class="finding-title">' + f.title + '</div>' +
+          '<div class="finding-takeaway">' + f.take + '</div>' +
+        '</div>' +
+        '<span class="finding-chevron">▸</span>';
+      var body = el("div", "finding-body", f.body);
+      d.appendChild(summary);
+      d.appendChild(body);
+      host.appendChild(d);
+    });
+  }
+
+  function renderDone() {
+    var host = document.getElementById("doneList");
+    doneList.forEach(function (h) {
+      var row = el("div", "done-row");
+      row.innerHTML =
+        '<span class="check-icon">✓</span>' +
+        '<div><div class="hu-title"><span class="hu-code">' + h.code + '</span> — ' + h.title + '</div>' +
+        '<div class="hu-impl">' + h.impl + '</div></div>' +
+        '<span class="hu-nota">' + (h.nota || "") + '</span>';
+      host.appendChild(row);
+    });
+  }
+
+  function renderBacklog() {
+    var host = document.getElementById("backlog");
+    backlog.forEach(function (group, gi) {
+      var d = el("details", "phase");
+      if (gi === 0) d.open = true;
+      var summary = el("summary", null,
+        '<span>' + group.name + '</span><span class="count">' + group.items.length + ' HU</span>');
+      var itemsWrap = el("div", "phase-items");
+      group.items.forEach(function (it) {
+        var row = el("div", "phase-item", '<span class="hu-code">' + it[0] + '</span><span>' + it[1] + '</span>');
+        itemsWrap.appendChild(row);
+      });
+      d.appendChild(summary);
+      d.appendChild(itemsWrap);
+      host.appendChild(d);
+    });
+  }
+
+  function setupFilter() {
+    var chips = document.querySelectorAll(".chip[data-cat]");
+    chips.forEach(function (chip) {
+      chip.addEventListener("click", function () {
+        chips.forEach(function (c) { c.removeAttribute("data-active"); });
+        chip.setAttribute("data-active", "true");
+        var cat = chip.getAttribute("data-cat");
+        document.querySelectorAll(".finding").forEach(function (f) {
+          f.hidden = !(cat === "all" || f.getAttribute("data-cat") === cat);
+        });
+      });
+    });
+  }
+
+  function setupToggleAll() {
+    var btn = document.getElementById("toggleAll");
+    var expanded = false;
+    btn.addEventListener("click", function () {
+      expanded = !expanded;
+      document.querySelectorAll(".finding").forEach(function (f) { f.open = expanded; });
+      btn.textContent = expanded ? "Contraer todos" : "Expandir todos";
+    });
+  }
+
+  renderFindings();
+  renderDone();
+  renderBacklog();
+  setupFilter();
+  setupToggleAll();
+})();
+</script>
