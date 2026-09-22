@@ -448,9 +448,9 @@
   <h1>Bitácora de Certificación Biométrica</h1>
   <p class="lede">Avance del backlog de 99 Historias de Usuario y las decisiones de arquitectura, orden y reuso que salieron al implementarlas — extraídas de las notas del checklist de desarrollo.</p>
   <div class="meta-bar">
-    <span><b>Última HU cerrada:</b> HU97</span>
-    <span><b>Siguiente:</b> HU98</span>
-    <span><b>Tests en verde:</b> 189/189</span>
+    <span><b>Última HU cerrada:</b> HU98</span>
+    <span><b>Siguiente:</b> HU99</span>
+    <span><b>Tests en verde:</b> 205/205</span>
     <span><b>Migraciones:</b> 3</span>
   </div>
 </header>
@@ -459,27 +459,27 @@
   <div class="stats">
     <div class="stat accent">
       <div class="stat-label">Completadas</div>
-      <div class="stat-value">15</div>
+      <div class="stat-value">16</div>
       <div class="stat-sub">de 99 HU, con test</div>
     </div>
     <div class="stat">
       <div class="stat-label">Pendientes</div>
-      <div class="stat-value">84</div>
-      <div class="stat-sub">siguiente: HU98</div>
+      <div class="stat-value">83</div>
+      <div class="stat-sub">siguiente: HU99</div>
     </div>
     <div class="stat">
       <div class="stat-label">Avance</div>
-      <div class="stat-value">15%</div>
+      <div class="stat-value">16%</div>
       <div class="stat-sub">del backlog total</div>
     </div>
     <div class="stat">
       <div class="stat-label">Hallazgos</div>
-      <div class="stat-value">11</div>
+      <div class="stat-value">13</div>
       <div class="stat-sub">notas de decisión registradas</div>
     </div>
   </div>
-  <div class="progress-track" role="img" aria-label="15 de 99 historias completadas">
-    <div class="progress-fill" style="width: 15.2%"></div>
+  <div class="progress-track" role="img" aria-label="16 de 99 historias completadas">
+    <div class="progress-fill" style="width: 16.2%"></div>
   </div>
 </section>
 
@@ -490,11 +490,11 @@
   </div>
 
   <div class="toolbar" id="toolbar">
-    <button class="chip" data-cat="all" data-active="true"><span class="dot" style="color:var(--ink)"></span>Todos (11)</button>
+    <button class="chip" data-cat="all" data-active="true"><span class="dot" style="color:var(--ink)"></span>Todos (13)</button>
     <button class="chip" data-cat="orden"><span class="dot" style="color:var(--cat-orden)"></span>Orden y dependencias (3)</button>
-    <button class="chip" data-cat="dup"><span class="dot" style="color:var(--cat-dup)"></span>Duplicados (1)</button>
+    <button class="chip" data-cat="dup"><span class="dot" style="color:var(--cat-dup)"></span>Duplicados (2)</button>
     <button class="chip" data-cat="adapt"><span class="dot" style="color:var(--cat-adapt)"></span>Adaptación arquitectónica (1)</button>
-    <button class="chip" data-cat="reuso"><span class="dot" style="color:var(--cat-reuso)"></span>Reuso e integración (6)</button>
+    <button class="chip" data-cat="reuso"><span class="dot" style="color:var(--cat-reuso)"></span>Reuso e integración (7)</button>
     <button class="toolbar-btn" id="toggleAll">Expandir todos</button>
   </div>
 
@@ -513,6 +513,8 @@
     <span class="code">BaseDeDatosMigrada (tests)</span>
     <span class="code">Trigger Postgres solo-lectura</span>
     <span class="code">.env / ArchivoEntornoLocal</span>
+    <span class="code">EntornoNumerico.LeerEnteroPositivo</span>
+    <span class="code">CambioEstadoUsuarioTestBuilder</span>
   </div>
 </section>
 
@@ -523,28 +525,29 @@
     <div class="open-item"><span class="mark">·</span><div>Contraseñas ya guardadas que no cumplan la política de HU42 quedan bloqueadas al autenticar; el alta/cambio de contraseña, cuando se construya, debe reutilizar <code class="mono">PoliticaContrasena</code>. <span class="src">Nota 7</span></div></div>
     <div class="open-item"><span class="mark">·</span><div>El contador de intentos fallidos de HU43 vive en memoria del proceso: se reinicia si la app se reinicia. <span class="src">Nota 8</span></div></div>
     <div class="open-item"><span class="mark">·</span><div>Cuando exista una pantalla de consulta de auditoría, debe aplicar <code class="mono">VerificarAccesoAdministradorAsync</code> (HU43) antes de mostrar los registros. <span class="src">Nota 9</span></div></div>
+    <div class="open-item"><span class="mark">·</span><div>Una sesión NO administrativa que ya tenía acceso y sigue vigente cuando deshabilitan a su usuario no se invalida sola todavía — es el criterio 6 de HU99 (invalidación inmediata de sesiones activas), se resuelve ahí. <span class="src">Nota 13</span></div></div>
   </div>
 </section>
 
 <section aria-label="Checklist completado">
-  <div class="section-head"><h2>Completadas — 15/99</h2></div>
+  <div class="section-head"><h2>Completadas — 16/99</h2></div>
   <div class="done-list" id="doneList"></div>
 </section>
 
 <section aria-label="Próximas HU">
   <div class="section-head"><h2>Próximas en el orden</h2></div>
   <div class="nextup">
-    <span class="pill">HU98 <span>Preservación de datos de usuarios deshabilitados</span></span>
     <span class="pill">HU99 <span>Bloqueo de autenticación para deshabilitados</span></span>
     <span class="pill">HU44 <span>Auditoría del aviso de tratamiento de datos</span></span>
     <span class="pill">HU45 <span>Documento ATDP con estampa cronológica</span></span>
+    <span class="pill">HU3 <span>Carga de archivo alfanumérico</span></span>
   </div>
 </section>
 
 <section aria-label="Backlog pendiente por fase">
   <div class="section-head">
     <h2>Backlog pendiente por fase</h2>
-    <span class="section-note">84 HU agrupadas por dominio, en el orden real de desarrollo</span>
+    <span class="section-note">83 HU agrupadas por dominio, en el orden real de desarrollo</span>
   </div>
   <div class="backlog-grid" id="backlog"></div>
 </section>
@@ -607,7 +610,17 @@
     { cat: "reuso", date: "2026-09-22", nota: "Nota 11", hus: "HU97 reutiliza HU96",
       title: "HU97 ya estaba resuelta en gran parte por las decisiones de HU96",
       take: "Los contratos nunca expusieron eliminación. Se agregó una tercera capa de defensa — trigger de Postgres y análisis estático del código — más un método que audita y rechaza cualquier intento.",
-      body: "<p><code class=\"mono\">IUsuarioRepository</code> e <code class=\"mono\">IGestionUsuariosServicio</code> nunca tuvieron un método de eliminación. Nuevo: <code class=\"mono\">EliminarAsync</code> — el punto único que cualquier canal futuro debería invocar para \"eliminar\"; siempre audita (actor, fecha, canal) y siempre rechaza, incluso sin sesión válida, porque la prohibición es absoluta. Trigger de Postgres bloquea DELETE/TRUNCATE sobre Usuario sin afectar UPDATE. Test de análisis estático vigila que nadie agregue un <code class=\"mono\">Usuario.Remove</code> en el futuro.</p>" }
+      body: "<p><code class=\"mono\">IUsuarioRepository</code> e <code class=\"mono\">IGestionUsuariosServicio</code> nunca tuvieron un método de eliminación. Nuevo: <code class=\"mono\">EliminarAsync</code> — el punto único que cualquier canal futuro debería invocar para \"eliminar\"; siempre audita (actor, fecha, canal) y siempre rechaza, incluso sin sesión válida, porque la prohibición es absoluta. Trigger de Postgres bloquea DELETE/TRUNCATE sobre Usuario sin afectar UPDATE. Test de análisis estático vigila que nadie agregue un <code class=\"mono\">Usuario.Remove</code> en el futuro.</p>" },
+
+    { cat: "dup", date: "2026-09-22", nota: "Nota 12", hus: "Auditoría transversal (HU2, HU29, HU43, HU96, HU97)",
+      title: "El usuario pidió confirmar que no hubiera duplicidad/hardcode — no estaba todo bien",
+      take: "Auditoría exhaustiva de TODO lo implementado (no solo lo tocado en la sesión): 5 hallazgos reales, incluida una recaída del mismo tipo de duplicado de test que ya se había corregido antes.",
+      body: "<p>Un bug real: el timeout de sesión (HU29) no validaba que el valor fuera positivo — un <code class=\"mono\">0</code> generaba sesiones que expiraban al instante, sin aviso; se compartió con el bloqueo de HU43 en <code class=\"mono\">EntornoNumerico.LeerEnteroPositivo</code>. Dos duplicaciones: la cadena de conexión por defecto copiada en producción y en tests, y un <code class=\"mono\">new Usuario{...}</code> a mano en vez del builder compartido (recaída del mismo error de un incidente anterior). Una pieza de código huérfano: <code class=\"mono\">GuardarAsync</code> sin llamadores de producción desde HU96 — eliminada, con riesgo real de saltarse el historial obligatorio si alguien la hubiera reusado. Una inconsistencia: el <code class=\"mono\">CancellationToken</code> de la auditoría de HU97 no seguía el mismo criterio ya aplicado en HU41.</p><div class=\"callout\">Cambio de proceso: se agregaron 4 chequeos obligatorios al cierre de cada HU (patrones sin nombre, código huérfano, consistencia entre módulos, bypass de builders), en vez de depender de que se pida una auditoría puntual.</div>" },
+
+    { cat: "reuso", date: "2026-09-22", nota: "Nota 13", hus: "HU98 reutiliza HU96/HU97",
+      title: "HU98 es casi enteramente consecuencia de HU96/HU97",
+      take: "5 de 6 criterios ya estaban cubiertos por el historial y la restricción de eliminación. La única pieza nueva es una consulta de administrador sobre usuarios deshabilitados.",
+      body: "<p>Nuevo: <code class=\"mono\">GestionUsuariosServicio.ObtenerAsync</code> — hasta ahora no existía forma de consultar los datos completos de un usuario (solo su historial de cambios); exige sesión de administrador y no depende del estado del usuario consultado. El resto de los criterios ya estaban probados: datos intactos tras deshabilitar (HU96), historial íntegro (HU96), cambio de estado lógico (HU96), registro de la deshabilitación (HU96).</p><div class=\"callout\">Se detectó y corrigió un test flaky real al correr la suite: comparar una fecha por igualdad exacta tras un viaje por Postgres (que redondea a microsegundos) contra un <code class=\"mono\">DateTimeOffset</code> de .NET (ticks de 100ns). No era un bug de datos, era la aserción del test.</div>" }
   ];
 
   var doneList = [
@@ -625,7 +638,8 @@
     { code: "HU43", title: "Acceso a funcionalidades de administración", impl: "VerificarAccesoAdministradorAsync + bloqueo", nota: "Nota 8" },
     { code: "HU41", title: "Auditoría de intentos de autenticación", impl: "conecta con el motor de HU74-77", nota: "Nota 9" },
     { code: "HU96", title: "Historial de estados del usuario", impl: "GestionUsuariosServicio + bootstrap admin", nota: "Nota 10" },
-    { code: "HU97", title: "Restricción absoluta de eliminación", impl: "EliminarAsync + trigger Postgres", nota: "Nota 11" }
+    { code: "HU97", title: "Restricción absoluta de eliminación", impl: "EliminarAsync + trigger Postgres", nota: "Nota 11" },
+    { code: "HU98", title: "Preservación de datos de usuarios deshabilitados", impl: "GestionUsuariosServicio.ObtenerAsync", nota: "Nota 13" }
   ];
 
   var backlog = [
