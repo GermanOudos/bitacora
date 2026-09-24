@@ -16,10 +16,10 @@
   <h1>Bitácora de Certificación Biométrica</h1>
   <p class="lede">Avance del backlog de 99 Historias de Usuario y las decisiones de arquitectura, orden y reuso que salieron al implementarlas — extraídas de las notas del checklist de desarrollo.</p>
   <div class="meta-bar">
-    <span><b>Última HU cerrada:</b> HU45</span>
-    <span><b>Siguiente:</b> HU3</span>
-    <span><b>Tests en verde:</b> 222/222</span>
-    <span><b>Migraciones:</b> 3</span>
+    <span><b>Última HU cerrada:</b> HU4</span>
+    <span><b>Siguiente:</b> HU5</span>
+    <span><b>Tests en verde:</b> 322/322</span>
+    <span><b>Migraciones:</b> 4</span>
   </div>
 </header>
 
@@ -27,27 +27,27 @@
   <div class="stats">
     <div class="stat accent">
       <div class="stat-label">Completadas</div>
-      <div class="stat-value">19</div>
+      <div class="stat-value">21</div>
       <div class="stat-sub">de 99 HU, con test</div>
     </div>
     <div class="stat">
       <div class="stat-label">Pendientes</div>
-      <div class="stat-value">80</div>
-      <div class="stat-sub">siguiente: HU3</div>
+      <div class="stat-value">78</div>
+      <div class="stat-sub">siguiente: HU5</div>
     </div>
     <div class="stat">
       <div class="stat-label">Avance</div>
-      <div class="stat-value">19%</div>
+      <div class="stat-value">21%</div>
       <div class="stat-sub">del backlog total</div>
     </div>
     <div class="stat">
       <div class="stat-label">Hallazgos</div>
-      <div class="stat-value">16</div>
+      <div class="stat-value">20</div>
       <div class="stat-sub">notas de decisión registradas</div>
     </div>
   </div>
-  <div class="progress-track" role="img" aria-label="19 de 99 historias completadas">
-    <div class="progress-fill" style="width: 19.2%"></div>
+  <div class="progress-track" role="img" aria-label="21 de 99 historias completadas">
+    <div class="progress-fill" style="width: 21.2%"></div>
   </div>
 </section>
 
@@ -58,11 +58,12 @@
   </div>
 
   <div class="toolbar" id="toolbar">
-    <button class="chip" data-cat="all" data-active="true"><span class="dot" style="color:var(--ink)"></span>Todos (16)</button>
+    <button class="chip" data-cat="all" data-active="true"><span class="dot" style="color:var(--ink)"></span>Todos (20)</button>
     <button class="chip" data-cat="orden"><span class="dot" style="color:var(--cat-orden)"></span>Orden y dependencias (3)</button>
     <button class="chip" data-cat="dup"><span class="dot" style="color:var(--cat-dup)"></span>Duplicados (2)</button>
     <button class="chip" data-cat="adapt"><span class="dot" style="color:var(--cat-adapt)"></span>Adaptación arquitectónica (1)</button>
-    <button class="chip" data-cat="reuso"><span class="dot" style="color:var(--cat-reuso)"></span>Reuso e integración (10)</button>
+    <button class="chip" data-cat="reuso"><span class="dot" style="color:var(--cat-reuso)"></span>Reuso e integración (12)</button>
+    <button class="chip" data-cat="fix"><span class="dot" style="color:var(--cat-fix)"></span>Correcciones (2)</button>
     <button class="toolbar-btn" id="toggleAll">Expandir todos</button>
   </div>
 
@@ -83,6 +84,12 @@
     <span class="code">.env / ArchivoEntornoLocal</span>
     <span class="code">EntornoNumerico.LeerEnteroPositivo</span>
     <span class="code">CambioEstadoUsuarioTestBuilder</span>
+    <span class="code">IVerificacionRutaCargue (gate HU12 en Core)</span>
+    <span class="code">ArchivoBiografico</span>
+    <span class="code">RegistroDeLogs</span>
+    <span class="code">PostgresFixture (una base de tests por corrida)</span>
+    <span class="code">EntornoTemporal (tests)</span>
+    <span class="code">CandidatoBiograficoTestBuilder / ArchivoBiograficoTestBuilder</span>
   </div>
 </section>
 
@@ -94,33 +101,35 @@
     <div class="open-item"><span class="mark">·</span><div>El contador de intentos fallidos de HU43 vive en memoria del proceso: se reinicia si la app se reinicia. <span class="src">Nota 8</span></div></div>
     <div class="open-item"><span class="mark">·</span><div>Cuando exista una pantalla de consulta de auditoría, debe aplicar <code class="mono">VerificarAccesoAdministradorAsync</code> (HU43) antes de mostrar los registros. <span class="src">Nota 9</span></div></div>
     <div class="open-item"><span class="mark">·</span><div>Decisión consciente: <code class="mono">VerificarAcceso</code> (HU1) no revisa el estado del usuario en vivo como sí hace <code class="mono">VerificarAccesoAdministradorAsync</code> (HU43) — hoy no importa porque no tiene ningún llamador de producción, pero el día que exista la primera operación no-administrativa protegida, debe aplicar el mismo patrón de verificación en vivo. <span class="src">Nota 14</span></div></div>
+    <div class="open-item"><span class="mark">·</span><div>HU5 quedó en gran parte cubierta por HU3 (sus notas técnicas piden los mismos campos de auditoría): al llegar se verifican sus criterios literales contra lo que ya existe, sin asumir cobertura ciega — igual que se hizo con HU4. <span class="src">Notas 17 y 20</span></div></div>
+    <div class="open-item"><span class="mark">·</span><div>Pendiente la verificación visual manual de la pantalla de carga del archivo alfanumérico y del regreso al login por inactividad. <span class="src">Notas 17 y 18</span></div></div>
   </div>
 </section>
 
 <section aria-label="Checklist completado">
-  <div class="section-head"><h2>Completadas — 19/99</h2></div>
+  <div class="section-head"><h2>Completadas — 21/99</h2></div>
   <div class="done-list" id="doneList"></div>
 </section>
 
 <section aria-label="Próximas HU">
   <div class="section-head"><h2>Próximas en el orden</h2></div>
   <div class="nextup">
-    <span class="pill">HU3 <span>Carga de archivo alfanumérico</span></span>
-    <span class="pill">HU4 <span>Validación estructural del archivo</span></span>
     <span class="pill">HU5 <span>Log de auditoría de la carga</span></span>
     <span class="pill">HU80 <span>Fecha/hora de inicio y fin del cargue</span></span>
+    <span class="pill">HU81 <span>Auditoría de usuario e IP del cargue</span></span>
+    <span class="pill">HU82 <span>Métricas de registros y NUIT</span></span>
   </div>
 </section>
 
 <section aria-label="Backlog pendiente por fase">
   <div class="section-head">
     <h2>Backlog pendiente por fase</h2>
-    <span class="section-note">80 HU agrupadas por dominio, en el orden real de desarrollo</span>
+    <span class="section-note">78 HU agrupadas por dominio, en el orden real de desarrollo</span>
   </div>
   <div class="backlog-grid" id="backlog"></div>
 </section>
 
-<footer>docs/Checklist-HU.md &amp; docs/Criterios-HU.md — sa_certification_app</footer>
+<footer>docs/Checklist-HU.md, docs/Notas-Checklist.md &amp; docs/Criterios-HU.md — sa_certification_app</footer>
 
 <script src="app.js"></script>
 </body>

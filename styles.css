@@ -13,6 +13,7 @@
   --cat-dup: #8347c9;
   --cat-adapt: #ad6110;
   --cat-reuso: #0e8f83;
+  --cat-fix: #c2410c;
   --shadow: 0 1px 2px rgba(20, 24, 38, 0.04), 0 8px 24px -12px rgba(20, 24, 38, 0.12);
   --font-display: "Manrope", system-ui, sans-serif;
   --font-body: "Source Serif 4", Georgia, serif;
@@ -35,6 +36,7 @@
     --cat-dup: #bd94f2;
     --cat-adapt: #eaa855;
     --cat-reuso: #3fd0c4;
+    --cat-fix: #fb923c;
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 28px -12px rgba(0, 0, 0, 0.55);
   }
 }
@@ -54,6 +56,7 @@
   --cat-dup: #bd94f2;
   --cat-adapt: #eaa855;
   --cat-reuso: #3fd0c4;
+  --cat-fix: #fb923c;
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 28px -12px rgba(0, 0, 0, 0.55);
 }
 
@@ -200,6 +203,7 @@ h2 { font-size: 20px; font-weight: 800; }
 .chip[data-cat="dup"][data-active="true"] { background: var(--cat-dup); }
 .chip[data-cat="adapt"][data-active="true"] { background: var(--cat-adapt); }
 .chip[data-cat="reuso"][data-active="true"] { background: var(--cat-reuso); }
+.chip[data-cat="fix"][data-active="true"] { background: var(--cat-fix); }
 .chip[data-cat="all"][data-active="true"] { background: var(--ink); }
 .toolbar-btn {
   margin-left: auto;
@@ -224,6 +228,7 @@ h2 { font-size: 20px; font-weight: 800; }
 .finding[data-cat="dup"] { border-left-color: var(--cat-dup); }
 .finding[data-cat="adapt"] { border-left-color: var(--cat-adapt); }
 .finding[data-cat="reuso"] { border-left-color: var(--cat-reuso); }
+.finding[data-cat="fix"] { border-left-color: var(--cat-fix); }
 .finding[hidden] { display: none !important; }
 
 .finding summary {
@@ -262,6 +267,7 @@ h2 { font-size: 20px; font-weight: 800; }
 .badge.dup { background: var(--cat-dup); }
 .badge.adapt { background: var(--cat-adapt); }
 .badge.reuso { background: var(--cat-reuso); }
+.badge.fix { background: var(--cat-fix); }
 .finding-date { font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-faint); }
 .finding-hus { font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-soft); }
 .finding-title { font-family: var(--font-display); font-weight: 700; font-size: 15px; }
