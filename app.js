@@ -108,7 +108,12 @@
     { cat: "adapt", date: "2026-09-24", nota: "Nota 22", hus: "HU80 (anexo JC50/JC51)",
       title: "HU80: el inicio de la carga ahora se registra al empezar, no al terminar",
       take: "Hasta HU5 el inicio solo quedaba escrito dentro del evento de fin: si la aplicación se caía a mitad de la carga, no quedaba rastro de que había empezado. HU80 pide registrarlo en el momento exacto en que comienza, incluso si falla enseguida.",
-      body: "<p><b>Nuevo:</b> evento de inicio propio, persistido apenas se autoriza la carga y antes de cualquier otro paso; inicio y fin comparten un identificador de ejecución. La duración total queda escrita en el evento de fin, y los dos quedan también en el log del sistema. En el historial, una carga con inicio y sin fin aparece como \"Sin finalizar\" en vez de quedar invisible.</p><div class=\"callout\"><b>Discrepancia resuelta por el anexo:</b> el criterio 1 pide el inicio en ISO 8601 y el criterio 2 el fin en yyyy-mm-dd hh:mm:ss,ms. El anexo normativo JC50/JC51 fija el segundo formato para los dos, mismo criterio que HU24 y HU75. Además, el patrón de fecha estaba copiado a mano en la plantilla de los logs del sistema; ahora sale de un solo lugar.</div>" }
+      body: "<p><b>Nuevo:</b> evento de inicio propio, persistido apenas se autoriza la carga y antes de cualquier otro paso; inicio y fin comparten un identificador de ejecución. La duración total queda escrita en el evento de fin, y los dos quedan también en el log del sistema. En el historial, una carga con inicio y sin fin aparece como \"Sin finalizar\" en vez de quedar invisible.</p><div class=\"callout\"><b>Discrepancia resuelta por el anexo:</b> el criterio 1 pide el inicio en ISO 8601 y el criterio 2 el fin en yyyy-mm-dd hh:mm:ss,ms. El anexo normativo JC50/JC51 fija el segundo formato para los dos, mismo criterio que HU24 y HU75. Además, el patrón de fecha estaba copiado a mano en la plantilla de los logs del sistema; ahora sale de un solo lugar.</div>" },
+
+    { cat: "fix", date: "2026-09-24", nota: "Nota 23", hus: "HU81 (y HU41)",
+      title: "HU81: la IP auditada salía del nombre del equipo, y en Linux eso da 127.0.1.1",
+      take: "El usuario ya quedaba en el evento de inicio de HU80. Al revisar la IP apareció un problema real en el proveedor que usa toda la auditoría desde HU41: solo aceptaba IPv4, no decía por qué no había IP y podía lanzar una excepción que tumbara la carga o el login.",
+      body: "<p><b>Corrección:</b> la IP ahora se toma de las interfaces de red activas, nunca lanza excepción, acepta IPv4 o IPv6 y, si no hay ninguna utilizable, registra 127.0.0.1 con la causa (criterio 4). Prefiere la interfaz con puerta de enlace, para no registrar un adaptador virtual como el de VirtualBox. La mejora aplica a todas las auditorías; la nota con la causa, solo a la carga.</p><div class=\"callout\"><b>Justificado:</b> el criterio 3 (cuenta de servicio o proceso automatizado) no aplica todavía: toda carga exige un administrador. Cuando la fase de cargue previa a los cotejos (HU58/HU60) la automatice, deberá registrar la cuenta de servicio.</div>" }
   ];
 
   var doneList = [
@@ -134,11 +139,12 @@
     { code: "HU3", title: "Carga de archivo alfanumérico", impl: "ArchivoBiografico + CargaBiograficaServicio, gate HU12", nota: "Nota 17" },
     { code: "HU4", title: "Validación estructural del archivo alfanumérico", impl: "tipo de error de ExpFecha: formato vs. calendario", nota: "Nota 20" },
     { code: "HU5", title: "Log de auditoría de la carga", impl: "historial de cargas consultable por el administrador", nota: "Nota 21" },
-    { code: "HU80", title: "Inicio y fin del proceso de carga", impl: "evento de inicio + duración, formato del anexo", nota: "Nota 22" }
+    { code: "HU80", title: "Inicio y fin del proceso de carga", impl: "evento de inicio + duración, formato del anexo", nota: "Nota 22" },
+    { code: "HU81", title: "Usuario e IP del proceso de carga", impl: "IP desde interfaces de red, IPv6 y causa sin IP", nota: "Nota 23" }
   ];
 
   var backlog = [
-    { name: "Carga alfanumérica inicial", items: [["HU81","Auditoría de usuario e IP"],["HU82","Métricas de registros y NUIT"],["HU83","Templates encontrados en carpetas"],["HU84","Archivo cargue_inicial.txt"],["HU85","Log disponible para consulta"],["HU86","Trazabilidad operativa del cargue"]] },
+    { name: "Carga alfanumérica inicial", items: [["HU82","Métricas de registros y NUIT"],["HU83","Templates encontrados en carpetas"],["HU84","Archivo cargue_inicial.txt"],["HU85","Log disponible para consulta"],["HU86","Trazabilidad operativa del cargue"]] },
     { name: "Consulta alfanumérica", items: [["HU30","Ingreso de criterios de búsqueda"],["HU31","Visualización de resultados"],["HU32","Notificación sin resultados"],["HU34","Integridad de datos mostrados"],["HU36","Registro de consultas"],["HU37","Persistencia en consulta.txt"],["HU38","Estructura uniforme del registro"],["HU39","Evidencia trazable para entrega"],["HU33","Exportación a PDF"]] },
     { name: "Templates biométricos", items: [["HU6","Estructura de carpetas de templates"],["HU7","Rango de numeración de dedos"],["HU8","Formatos soportados en importación"],["HU16","Recepción y validación de templates"],["HU18","Auditoría de recepción/procesamiento"]] },
     { name: "Descifrado y llaves", items: [["HU9","Registro seguro de llaves"],["HU10","Integridad de llaves como prerequisito"],["HU11","Motor de descifrado sobre 'appl'"],["HU14","Descifrado previo al cotejo 1 a 1"],["HU15","Validación/timeout del descifrado"],["HU17","Procesamiento para matching"]] },
