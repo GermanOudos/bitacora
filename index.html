@@ -16,9 +16,9 @@
   <h1>Bitácora de Certificación Biométrica</h1>
   <p class="lede">Avance del backlog de 99 Historias de Usuario y las decisiones de arquitectura, orden y reuso que salieron al implementarlas — extraídas de las notas del checklist de desarrollo.</p>
   <div class="meta-bar">
-    <span><b>Última HU cerrada:</b> HU81</span>
-    <span><b>Siguiente:</b> HU82</span>
-    <span><b>Tests en verde:</b> 369/369</span>
+    <span><b>Última HU cerrada:</b> HU83</span>
+    <span><b>Siguiente:</b> HU84</span>
+    <span><b>Tests en verde:</b> 423/423</span>
     <span><b>Migraciones:</b> 4</span>
   </div>
 </header>
@@ -27,27 +27,27 @@
   <div class="stats">
     <div class="stat accent">
       <div class="stat-label">Completadas</div>
-      <div class="stat-value">24</div>
+      <div class="stat-value">26</div>
       <div class="stat-sub">de 99 HU, con test</div>
     </div>
     <div class="stat">
       <div class="stat-label">Pendientes</div>
-      <div class="stat-value">75</div>
-      <div class="stat-sub">siguiente: HU82</div>
+      <div class="stat-value">73</div>
+      <div class="stat-sub">siguiente: HU84</div>
     </div>
     <div class="stat">
       <div class="stat-label">Avance</div>
-      <div class="stat-value">24%</div>
+      <div class="stat-value">26%</div>
       <div class="stat-sub">del backlog total</div>
     </div>
     <div class="stat">
       <div class="stat-label">Hallazgos</div>
-      <div class="stat-value">23</div>
+      <div class="stat-value">25</div>
       <div class="stat-sub">notas de decisión registradas</div>
     </div>
   </div>
-  <div class="progress-track" role="img" aria-label="24 de 99 historias completadas">
-    <div class="progress-fill" style="width: 24.2%"></div>
+  <div class="progress-track" role="img" aria-label="26 de 99 historias completadas">
+    <div class="progress-fill" style="width: 26.3%"></div>
   </div>
 </section>
 
@@ -102,28 +102,29 @@
     <div class="open-item"><span class="mark">·</span><div>El contador de intentos fallidos de HU43 vive en memoria del proceso: se reinicia si la app se reinicia. <span class="src">Nota 8</span></div></div>
     <div class="open-item"><span class="mark">·</span><div>Decisión consciente: <code class="mono">VerificarAcceso</code> (HU1) no revisa el estado del usuario en vivo como sí hace <code class="mono">VerificarAccesoAdministradorAsync</code> (HU43) — hoy no importa porque no tiene ningún llamador de producción, pero el día que exista la primera operación no-administrativa protegida, debe aplicar el mismo patrón de verificación en vivo. <span class="src">Nota 14</span></div></div>
     <div class="open-item"><span class="mark">·</span><div>Pendiente la verificación manual del regreso al login por inactividad y del historial de cargas (la pantalla de carga ya se probó de punta a punta con <code class="mono">C:\RNEC</code> y en Linux). <span class="src">Notas 18 y 21</span></div></div>
+    <div class="open-item"><span class="mark">·</span><div>El <code class="mono">ALFA.txt</code> real de la recertificación de 2025 usa <code class="mono">;</code>, cabecera <code class="mono">PIN;…;Particula</code> y ExpFecha <code class="mono">yyyy-mm-dd</code> (igual que el Anexo Técnico 1), pero JEC1/JEC2 del Word, implementados en HU3/HU4, piden coma y YYYYMMDD: ese archivo se rechazaría. Pendiente de decisión. Además el log del cargue se llama <code class="mono">cargueInicial.txt</code> en el Anexo y <code class="mono">cargue_inicial.txt</code> en HU84: se decide al llegar a HU84. <span class="src">Nota 24</span></div></div>
   </div>
 </section>
 
 <section aria-label="Checklist completado">
-  <div class="section-head"><h2>Completadas — 24/99</h2></div>
+  <div class="section-head"><h2>Completadas — 26/99</h2></div>
   <div class="done-list" id="doneList"></div>
 </section>
 
 <section aria-label="Próximas HU">
   <div class="section-head"><h2>Próximas en el orden</h2></div>
   <div class="nextup">
-    <span class="pill">HU82 <span>Métricas de registros y NUIT</span></span>
-    <span class="pill">HU83 <span>Templates encontrados en carpetas</span></span>
     <span class="pill">HU84 <span>Archivo cargue_inicial.txt</span></span>
     <span class="pill">HU85 <span>Log disponible para consulta</span></span>
+    <span class="pill">HU86 <span>Trazabilidad operativa del cargue</span></span>
+    <span class="pill">HU30 <span>Ingreso de criterios de búsqueda</span></span>
   </div>
 </section>
 
 <section aria-label="Backlog pendiente por fase">
   <div class="section-head">
     <h2>Backlog pendiente por fase</h2>
-    <span class="section-note">75 HU agrupadas por dominio, en el orden real de desarrollo</span>
+    <span class="section-note">73 HU agrupadas por dominio, en el orden real de desarrollo</span>
   </div>
   <div class="backlog-grid" id="backlog"></div>
 </section>
