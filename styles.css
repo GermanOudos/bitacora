@@ -195,6 +195,7 @@ h2 { font-size: 20px; font-weight: 800; }
   transition: background 0.12s, color 0.12s, border-color 0.12s;
 }
 .chip .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; opacity: 0.7; }
+.chip-count { font-family: var(--font-mono); font-size: 11px; opacity: 0.75; }
 .chip[data-active="true"] {
   color: var(--surface);
   border-color: transparent;
@@ -435,10 +436,76 @@ footer {
   font-family: var(--font-mono);
 }
 
+.primary-nav {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  margin: 0 0 28px;
+  padding: 8px 0;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  scrollbar-width: thin;
+}
+.primary-nav a {
+  flex: 0 0 auto;
+  padding: 7px 12px;
+  border-radius: 8px;
+  color: var(--ink-soft);
+  font-family: var(--font-display);
+  font-size: 12.5px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.primary-nav a:hover,
+.primary-nav a[aria-current="page"] {
+  background: var(--surface);
+  color: var(--accent);
+}
+.primary-nav a[aria-current="page"] { box-shadow: inset 0 0 0 1px var(--border); }
+.view-panel[hidden] { display: none; }
+.summary-lower {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 24px;
+  align-items: start;
+  margin-top: 30px;
+}
+.summary-lower .section-head { margin-bottom: 12px; }
+.shortcut-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.shortcut {
+  display: grid;
+  gap: 3px;
+  min-height: 74px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  text-decoration: none;
+  box-shadow: var(--shadow);
+}
+.shortcut strong {
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 12.5px;
+}
+.shortcut span { color: var(--ink-faint); font-size: 12px; }
+.shortcut:hover { border-color: var(--accent); }
+
 @media (max-width: 720px) {
   .stats { grid-template-columns: repeat(2, 1fr); }
   .backlog-grid { grid-template-columns: 1fr; }
   .done-row { grid-template-columns: 46px 1fr; }
   .done-row .hu-nota { display: none; }
   .finding-body { padding-left: 18px; }
+  .summary-lower { grid-template-columns: 1fr; gap: 22px; }
+}
+@media (max-width: 420px) {
+  .shortcut-grid { grid-template-columns: 1fr; }
 }

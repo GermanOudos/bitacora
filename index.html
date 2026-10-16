@@ -14,63 +14,92 @@
 <header class="top">
   <div class="eyebrow">sa_certification_app · HU_App_Certificacion_V2.docx</div>
   <h1>Bitácora de Certificación Biométrica</h1>
-  <p class="lede">Avance del backlog de 99 Historias de Usuario y las decisiones de arquitectura, orden y reuso que salieron al implementarlas — extraídas de las notas del checklist de desarrollo.</p>
+  <p class="lede">Seguimiento de las 100 historias de usuario, sus decisiones técnicas y los pendientes de certificación.</p>
   <div class="meta-bar">
-    <span><b>Última HU cerrada:</b> HU31</span>
-    <span><b>Siguiente:</b> HU32</span>
-    <span><b>Tests en verde:</b> 493/493</span>
-    <span><b>Migraciones:</b> 4</span>
+    <span><b>Última HU cerrada:</b> HU47</span>
+    <span><b>Siguiente:</b> HU48</span>
+    <span><b>Tests en verde:</b> 924/927 (3 preexistentes, no relacionadas, por licencia de PdfSharp)</span>
+    <span><b>Migraciones:</b> 14</span>
   </div>
 </header>
 
-<section aria-label="Resumen de avance">
+<nav class="primary-nav" aria-label="Secciones de la bitácora">
+  <a href="#resumen">Resumen</a>
+  <a href="#hallazgos">Hallazgos</a>
+  <a href="#reuso">Reuso</a>
+  <a href="#abiertos">Puntos abiertos</a>
+  <a href="#completadas">Completadas</a>
+  <a href="#pendientes">Backlog</a>
+</nav>
+
+<section id="resumen" class="view-panel" aria-label="Resumen de avance">
   <div class="stats">
     <div class="stat accent">
       <div class="stat-label">Completadas</div>
-      <div class="stat-value">31</div>
-      <div class="stat-sub">de 99 HU, con test</div>
+      <div class="stat-value">56</div>
+      <div class="stat-sub">de 100 HU, con test</div>
     </div>
     <div class="stat">
       <div class="stat-label">Pendientes</div>
-      <div class="stat-value">68</div>
-      <div class="stat-sub">siguiente: HU32</div>
+      <div class="stat-value">44</div>
+      <div class="stat-sub">siguiente: HU48</div>
     </div>
     <div class="stat">
       <div class="stat-label">Avance</div>
-      <div class="stat-value">31%</div>
+      <div class="stat-value">56%</div>
       <div class="stat-sub">del backlog total</div>
     </div>
     <div class="stat">
       <div class="stat-label">Hallazgos</div>
-      <div class="stat-value">31</div>
+      <div class="stat-value">71</div>
       <div class="stat-sub">notas de decisión registradas</div>
     </div>
   </div>
-  <div class="progress-track" role="img" aria-label="31 de 99 historias completadas">
-    <div class="progress-fill" style="width: 31.3%"></div>
+  <div class="progress-track" role="img" aria-label="Avance del backlog: 56%">
+    <div class="progress-fill" style="width: 56%"></div>
+  </div>
+
+  <div class="summary-lower">
+    <div class="summary-next">
+      <div class="section-head"><h2>Próximas en el orden</h2></div>
+      <div class="nextup">
+        <span class="pill">HU48 <span>Despliegue de datos tras hit</span></span>
+        <span class="pill">HU25 <span>Integridad de logs del cotejo</span></span>
+        <span class="pill">HU46 <span>Enmascaramiento visual de huella</span></span>
+      </div>
+    </div>
+    <div class="summary-shortcuts">
+      <div class="section-head"><h2>Explorar la bitácora</h2></div>
+      <div class="shortcut-grid">
+        <a class="shortcut" href="#hallazgos"><strong>Hallazgos y decisiones</strong><span>Revisa las decisiones y su contexto.</span></a>
+        <a class="shortcut" href="#reuso"><strong>Piezas reutilizables</strong><span>Consulta componentes compartidos.</span></a>
+        <a class="shortcut" href="#abiertos"><strong>Puntos abiertos</strong><span>Identifica riesgos y verificaciones pendientes.</span></a>
+        <a class="shortcut" href="#pendientes"><strong>Backlog pendiente</strong><span>Explora las HU agrupadas por fase.</span></a>
+      </div>
+    </div>
   </div>
 </section>
 
-<section aria-label="Hallazgos">
+<section id="hallazgos" class="view-panel" aria-label="Hallazgos">
   <div class="section-head">
     <h2>Hallazgos y decisiones</h2>
     <span class="section-note">lo más importante — cada uno viene de una Nota del checklist</span>
   </div>
 
   <div class="toolbar" id="toolbar">
-    <button class="chip" data-cat="all" data-active="true"><span class="dot" style="color:var(--ink)"></span>Todos (23)</button>
-    <button class="chip" data-cat="orden"><span class="dot" style="color:var(--cat-orden)"></span>Orden y dependencias (3)</button>
-    <button class="chip" data-cat="dup"><span class="dot" style="color:var(--cat-dup)"></span>Duplicados (2)</button>
-    <button class="chip" data-cat="adapt"><span class="dot" style="color:var(--cat-adapt)"></span>Adaptación arquitectónica (2)</button>
-    <button class="chip" data-cat="reuso"><span class="dot" style="color:var(--cat-reuso)"></span>Reuso e integración (13)</button>
-    <button class="chip" data-cat="fix"><span class="dot" style="color:var(--cat-fix)"></span>Correcciones (3)</button>
+    <button class="chip" data-cat="all" data-active="true"><span class="dot" style="color:var(--ink)"></span><span>Todos</span> <span class="chip-count">46</span></button>
+    <button class="chip" data-cat="orden"><span class="dot" style="color:var(--cat-orden)"></span><span>Orden y dependencias</span> <span class="chip-count">3</span></button>
+    <button class="chip" data-cat="dup"><span class="dot" style="color:var(--cat-dup)"></span><span>Duplicados</span> <span class="chip-count">2</span></button>
+    <button class="chip" data-cat="adapt"><span class="dot" style="color:var(--cat-adapt)"></span><span>Adaptación arquitectónica</span> <span class="chip-count">9</span></button>
+    <button class="chip" data-cat="reuso"><span class="dot" style="color:var(--cat-reuso)"></span><span>Reuso e integración</span> <span class="chip-count">22</span></button>
+    <button class="chip" data-cat="fix"><span class="dot" style="color:var(--cat-fix)"></span><span>Correcciones</span> <span class="chip-count">9</span></button>
     <button class="toolbar-btn" id="toggleAll">Expandir todos</button>
   </div>
 
   <div id="findings"></div>
 </section>
 
-<section aria-label="Piezas reutilizables">
+<section id="reuso" class="view-panel" aria-label="Piezas reutilizables">
   <div class="section-head"><h2>Piezas construidas para reusar</h2></div>
   <p class="section-note" style="font-style:normal; color:var(--ink-soft); font-family:var(--font-body); font-size:13.5px;">Cada una nació en una HU y ya la reutilizan las siguientes sin duplicar lógica.</p>
   <div class="reuse-strip">
@@ -91,10 +120,21 @@
     <span class="code">ContextoCargaBiografica</span>
     <span class="code">EntornoTemporal (tests)</span>
     <span class="code">CandidatoBiograficoTestBuilder / ArchivoBiograficoTestBuilder</span>
+    <span class="code">CarpetaEvidenciasProvider</span>
+    <span class="code">HashCanonico / VerificarIntegridadAsync (reusado desde HU45)</span>
+    <span class="code">IDetectorImpresoras (Windows/Linux, nunca lanza)</span>
+    <span class="code">IValidadorEstructuraPlantillas (llamado desde RecepcionTemplates, HU16)</span>
+    <span class="code">IValidadorNumeracionDedo (llamado desde RecepcionTemplates, HU16)</span>
+    <span class="code">AuditoriaEnSegundoPlano (cola en memoria, escritura en segundo plano; C6 medido ~1%)</span>
+    <span class="code">ImportadorAuditoriaPendiente (respaldo JSONL a Postgres, DbContext propio)</span>
+    <span class="code">ConsultaAuditoriaTemplates (consulta y exportación, solo administrador)</span>
+    <span class="code">IProteccionLlaves / ProteccionLlavesDpapi y ProteccionLlavesAesGcm (cifrado en reposo por sistema)</span>
+    <span class="code">RegistroLlavesDescifrado (valida, protege y audita el registro de llaves)</span>
+    <span class="code">IValidadorFormatoPlantilla (firma FMR\0, PKM provisional)</span>
   </div>
 </section>
 
-<section aria-label="Puntos abiertos">
+<section id="abiertos" class="view-panel" aria-label="Puntos abiertos">
   <div class="section-head"><h2>Puntos abiertos</h2></div>
   <div class="open-list">
     <div class="open-item"><span class="mark">·</span><div>HU78 exige <code class="mono">ConcurrenciaCxAlfa.txt</code> y <code class="mono">Concurrencia_alfanumerica_servidor.txt</code>, pero ninguna de las 99 HU los genera explícitamente — posible vacío real del backlog. <span class="src">Nota 2</span></div></div>
@@ -104,28 +144,30 @@
     <div class="open-item"><span class="mark">·</span><div>Pendiente la verificación manual del regreso al login por inactividad y del historial de cargas (la pantalla de carga ya se probó de punta a punta con <code class="mono">C:\RNEC</code> y en Linux). <span class="src">Notas 18 y 21</span></div></div>
     <div class="open-item"><span class="mark">·</span><div>El <code class="mono">ALFA.txt</code> real de la recertificación de 2025 usa <code class="mono">;</code>, cabecera <code class="mono">PIN;…;Particula</code> y ExpFecha <code class="mono">yyyy-mm-dd</code> (igual que el Anexo Técnico 1), pero JEC1/JEC2 del Word, implementados en HU3/HU4, piden coma y YYYYMMDD: ese archivo se rechazaría. Pendiente de decisión. <span class="src">Nota 24</span></div></div>
     <div class="open-item"><span class="mark">·</span><div>JC52 pide separar los campos de <code class="mono">cargue_inicial.txt</code> con coma y también escribir los milisegundos con coma (<code class="mono">11:00:35,070</code>): cada fecha parte la línea en un trozo más. Se implementó así, como se decidió; queda por confirmar si se mantiene o se cambia el separador. <span class="src">Nota 26</span></div></div>
+    <div class="open-item"><span class="mark">·</span><div>El NUT que genera HU36 (<code class="mono">consulta_alfanumerica-&lt;guid&gt;</code>) no cumple JC29 ("cadena alfanumérica exactamente de 12 bytes"); ahora también se escribe así en <code class="mono">ConsultaAlfa.txt</code> (HU37) y en su log de acceso (HU39). Se consultó al usuario y se decidió dejarlo sin corregir por ahora. <span class="src">Nota 38</span></div></div>
+    <div class="open-item"><span class="mark">·</span><div>La rama Linux de <code class="mono">IDetectorImpresoras</code> (<code class="mono">lpstat -p</code>) no se pudo ejercitar en el entorno de desarrollo (Windows); queda pendiente verificarla manualmente en una VM Linux, mismo criterio que la rama de rutas de HU13. <span class="src">Nota 41</span></div></div>
+    <div class="open-item"><span class="mark">·</span><div>La muestra real de la certificación 2025 (carpeta <code class="mono">Appl</code>, archivos <code class="mono">1.iso-fmr</code> en minúscula) no cumple JEC4/JEC5 (sensibilidad a mayúsculas/minúsculas) y queda marcada "no conforme" por el validador de HU6 -- a propósito, documentado como hallazgo esperado, no un bug. El conteo tolerante de HU82/83 no cambia. <span class="src">Nota 42</span></div></div>
+    <div class="open-item"><span class="mark">·</span><div>El chequeo de formato PKM (HU8) es provisional (solo exige contenido no vacío): no existe especificación pública de ese formato ni ninguna muestra <code class="mono">.pkm</code> real disponible. Pendiente reemplazarlo cuando se consiga la firma real del SDK biométrico (Securid). <span class="src">Nota 44</span></div></div>
+    <div class="open-item"><span class="mark">·</span><div>La entrega del cliente en <code class="mono">C:\RNEC</code> (APPL y CAND) usaba extensión <code class="mono">.iso-fmr</code> en minúsculas y números de dedo sin cero (<code class="mono">1.ISO-FMR</code>). Se mantuvo el criterio estricto de JEC4/JEC5 y HU7, y se renombraron los 200 archivos para que pasen la validación. Pendiente avisar al cliente para que entregue así desde el origen. <span class="src">Nota 45</span></div></div>
+    <div class="open-item"><span class="mark">·</span><div>HU18 C4 (procesamiento y matching 1:1/1:N) queda sin cumplir hasta que exista HU23: debe llamar a la auditoría de inicio y fin del matching (HU17, que preparaba el template para esto, ya está cerrada). <span class="src">Nota 46</span></div></div>
+    <div class="open-item"><span class="mark">·</span><div>El respaldo de auditoría (HU41) se drena completo en cada llamada de <code class="mono">RegistrarAsync</code>: con un respaldo grande, un login se ralentiza. El importador de HU18 lo vacía en el uso normal. <span class="src">Nota 46</span></div></div>
+    <div class="open-item"><span class="mark">·</span><div>HU9: el Word dice <code class="mono">clopez.key</code> y la nonce como texto; el Anexo Técnico 1 dice <code class="mono">clave.key</code> y <code class="mono">nonce_BASE64.nonce</code>. Se implementó el Anexo, con decisión del usuario. El Word queda pendiente de corregir. <span class="src">Nota 47</span></div></div>
+    <div class="open-item"><span class="mark">·</span><div>En Windows, las llaves cifradas con DPAPI quedan ligadas a la cuenta y al equipo; en Linux, a la clave maestra (<code class="mono">clave-maestra.bin</code>). Si cambian o se borran, hay que registrarlas de nuevo. La rama Linux (permisos 0600) no se ejecutó aún en Linux. <span class="src">Nota 47</span></div></div>
+    <div class="open-item"><span class="mark">·</span><div>HU10 solo tiene un llamador manual (botón "Verificar llaves"): el cotejo (HU23) debe invocar <code class="mono">IVerificacionIntegridadLlaves</code> antes de iniciar para que el bloqueo sea real, no solo un mensaje en pantalla. <span class="src">Nota 48</span></div></div>
+    <div class="open-item"><span class="mark">·</span><div>HU11: el algoritmo (AES-GCM) y la derivación del nonce por archivo son provisionales -- no hay ninguna muestra real de <code class="mono">appl</code> cifrada por la Registraduría contra la cual confirmar el formato. Se ajustará cuando la entreguen. <span class="src">Nota 54</span></div></div>
+    <div class="open-item"><span class="mark">·</span><div>HU14: un aplicante con huellas parcialmente descifradas queda "Exitoso" si al menos una se descifra -- decisión tomada a falta de un criterio explícito, favoreciendo al ciudadano. Revisar si el cotejo real (HU23) exige lo contrario. <span class="src">Nota 55</span></div></div>
   </div>
 </section>
 
-<section aria-label="Checklist completado">
-  <div class="section-head"><h2>Completadas — 31/99</h2></div>
+<section id="completadas" class="view-panel" aria-label="Checklist completado">
+  <div class="section-head"><h2>Completadas — 53/100</h2></div>
   <div class="done-list" id="doneList"></div>
 </section>
 
-<section aria-label="Próximas HU">
-  <div class="section-head"><h2>Próximas en el orden</h2></div>
-  <div class="nextup">
-    <span class="pill">HU85 <span>Log disponible para consulta</span></span>
-    <span class="pill">HU86 <span>Trazabilidad operativa del cargue</span></span>
-    <span class="pill">HU30 <span>Ingreso de criterios de búsqueda</span></span>
-    <span class="pill">HU31 <span>Visualización de resultados</span></span>
-  </div>
-</section>
-
-<section aria-label="Backlog pendiente por fase">
+<section id="pendientes" class="view-panel" aria-label="Backlog pendiente por fase">
   <div class="section-head">
     <h2>Backlog pendiente por fase</h2>
-    <span class="section-note">72 HU agrupadas por dominio, en el orden real de desarrollo</span>
+    <span class="section-note">44 HU agrupadas por dominio, en el orden real de desarrollo</span>
   </div>
   <div class="backlog-grid" id="backlog"></div>
 </section>
