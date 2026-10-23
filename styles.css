@@ -326,6 +326,8 @@ details[open] .finding-chevron { transform: rotate(90deg); }
 }
 .open-item .mark { color: var(--warn); font-weight: 800; font-family: var(--font-display); }
 .open-item .src { color: var(--ink-faint); font-family: var(--font-mono); font-size: 11.5px; }
+.open-item.resolved { opacity: 0.85; }
+.open-item.resolved .mark { color: var(--success); }
 
 /* ---------- Checklist: completed ---------- */
 .done-list { display: grid; gap: 8px; }
